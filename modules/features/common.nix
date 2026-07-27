@@ -19,7 +19,8 @@
         nixpkgs.config.allowUnfree = true;
 
         environment.systemPackages = with pkgs; [
-            micro
+	    localsend
+	    micro
             ddcui
             ddcutil
             alacritty
