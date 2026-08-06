@@ -30,15 +30,16 @@
                 xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
                 outputs = {
-                    "DP-1" = {
-                        mode = "1920x1080@165.004";
-                        scale = 1;
+                    "eDP-1" = {
+                        mode = "2560x1600@165.000";
+                        scale = 1.4;
                         transform = "normal";
                         position = _: {props = { x = 0; y = 0; };};
                     };
                 };
 
                 input ={
+			disable-power-key-handling = _:{};
                     keyboard = {
                         xkb = {
                             layout = "us,ua";
@@ -56,35 +57,49 @@
                     focus-follows-mouse = _: {
                         max-scroll-amount = "0%";
                     };
+			touchpad = {
+				tap = _: {};
+				natural-scroll = _: {};
+				dwt = _:{};
+				#accel-speed = 0.5;
+				#accel-profile = "flat";
+				#scroll-method = "two-finger";
+			};
                 };
 
                 layout = {
-                    gaps = 10;
+			always-center-single-column = _: {};
+                    gaps = 8;
                     preset-column-widths = [
                         {proportion = 0.33333;}
                         {proportion = 0.5;}
                         {proportion = 0.8;}
                     ];
                     focus-ring = {
-                        width = 2;
+                        width = 3;
                         active-color = "#f46581";
 
                     };
                 };
 
                 animations = {
-                    slowdown = 1.5;
+                    slowdown = 1;
                 };
 
-#                 window-rules = [
-#                     {
-#                         matches = [
-#                             { app-id = "firefox$";}
-#                             { title = "^Picture-in-Picture$";}
-#                         ];
-#                         open-floating = true;
-#                     }
-#                 ];
+                 window-rules = [
+                     {
+                         matches = [
+                             { app-id = "firefox$";}
+                             { title = "^Picture-in-Picture$";}
+                         ];
+                         open-floating = true;
+                    }
+
+			{
+				geometry-corner-radius = 12;
+				clip-to-geometry = true;
+			}
+		];
 
                 binds = {
                     "Mod+Return".spawn = "alacritty";
@@ -95,7 +110,9 @@
   "Mod+V".toggle-window-floating = {};
   "Mod+Shift+V".switch-focus-between-floating-and-tiling = {};
   "Mod+Shift+E".quit = {};                # asks for confirmation by default
-
+	"Mod+C".center-column = {};
+	"Mod+Shift+C".center-visible-columns = {};
+	"Mod+A".spawn-sh = "${noctalia} ipc call launcher clipboard";
 
   "XF86AudioRaiseVolume".spawn-sh = "${noctalia} ipc call volume increase";
   "XF86AudioLowerVolume".spawn-sh = "${noctalia} ipc call volume decrease";
@@ -110,7 +127,10 @@
   "XF86AudioPrev".spawn-sh = "playerctl previous";
   "XF86AudioNext".spawn-sh = "platerctl next";
 
-  "Mod+P".spawn-sh = "${noctalia} ipc call wallpaper toggle";
+  "XF86MonBrightnessUp".spawn-sh = "brightnessctl set +5%";
+  "XF86MonBrightnessDown".spawn-sh = "brightnessctl set 5-%";
+  
+	"Mod+P".spawn-sh = "${noctalia} ipc call wallpaper toggle";
 
   # --- Column management ---
   "Mod+Comma".consume-window-into-column = {};   # pull the focused window into the adjacent column (stack it)
@@ -140,7 +160,7 @@
   # --- Sizing ---
   "Mod+R".switch-preset-column-width = {};
   "Mod+Shift+R".reset-window-height = {};
-
+  "XF86PowerOff".spawn-sh = "${noctalia} ipc call sessionMenu toggle";
   # --- Misc ---
   "Print".screenshot = {};
                 };
