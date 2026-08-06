@@ -38,6 +38,34 @@
       LC_TIME = "uk_UA.UTF-8";
     };
 
+		services.logind = {
+			powerKey = "ignore";
+		};
+
+		environment.loginShellInit = ''
+			if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+				exec niri
+			fi
+		'';
+ 		programs.bash.shellAliases ={
+ 		       	la = "ls -al";
+ 		       	cl = "clear";
+ 		       	test-build = "sudo nixos-rebuild test --flake ~/nix-conf#myPc";
+ 		       	switch-build = "sudo nixos-rebuild switch --flake ~/nix-conf#myPc";	
+		};
+		
+
+		myNiri.extraSettings = {
+			outputs = {
+				"DP-1" = {
+					mode = "1920x1080@165.004";
+					scale = 1;
+					transform = "normal";
+					position = _: {props = {x = 0; y = 0;};};
+				};
+			};
+		};
+
     programs.appimage.enable = true;
     programs.appimage.binfmt = true;
 
