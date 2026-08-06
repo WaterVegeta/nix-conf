@@ -138,37 +138,37 @@
           "unreadBadgeColor": "primary"
         },
         {
-          "deviceNativePath": "__default__",
-          "displayMode": "graphic-clean",
+          "deviceNativePath": "hidpp_battery_0",
+          "displayMode": "graphic",
           "hideIfIdle": false,
-          "hideIfNotDetected": true,
+          "hideIfNotDetected": false,
           "id": "Battery",
           "showNoctaliaPerformance": false,
           "showPowerProfiles": false
         },
         {
-          "displayMode": "onhover",
-          "iconColor": "none",
+          "displayMode": "alwaysShow",
+          "iconColor": "primary",
           "id": "Volume",
           "middleClickCommand": "pwvucontrol || pavucontrol",
-          "textColor": "none"
+          "textColor": "primary"
         },
         {
           "applyToAllMonitors": false,
-          "displayMode": "onhover",
-          "iconColor": "none",
+          "displayMode": "alwaysShow",
+          "iconColor": "secondary",
           "id": "Brightness",
-          "textColor": "none"
+          "textColor": "secondary"
         },
         {
           "colorizeDistroLogo": false,
-          "colorizeSystemIcon": "none",
+          "colorizeSystemIcon": "tertiary",
           "colorizeSystemText": "none",
           "customIconPath": "",
-          "enableColorization": false,
+          "enableColorization": true,
           "icon": "noctalia",
           "id": "ControlCenter",
-          "useDistroLogo": false
+          "useDistroLogo": true
         }
       ]
     },
@@ -296,7 +296,7 @@
   "wallpaper": {
       "enabled": true,
       "overviewEnabled": false,
-      "directory": "/home/what/Pictures/Wallpapers",
+      "directory": "/home/kenni/Pictures/Wallpapers",
       "monitorDirectories": [],
       "enableMultiMonitorDirectories": false,
       "showHiddenFiles": false,
@@ -414,11 +414,11 @@
         "id": "audio-card"
       },
       {
-        "enabled": false,
+        "enabled": true,
         "id": "brightness-card"
       },
       {
-        "enabled": true,
+        "enabled": false,
         "id": "weather-card"
       },
       {
@@ -496,7 +496,7 @@
     "bluetoothAutoConnect": true
   },
   "sessionMenu": {
-    "enableCountdown": true,
+    "enableCountdown": false,
     "countdownDuration": 10000,
     "position": "center",
     "showHeader": true,
@@ -598,7 +598,7 @@
     "location": "top_right",
     "autoHideMs": 2000,
     "overlayLayer": true,
-    "backgroundOpacity": 1,
+    "backgroundOpacity": 0.5,
     "enabledTypes": [
       0,
       1,

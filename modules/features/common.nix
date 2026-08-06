@@ -10,10 +10,10 @@
 
 #         services.displayManager.sddm.enable = true;
 
-        services.greetd = {
-            enable = true;
-            settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
-        };
+        #services.greetd = {
+         #   enable = true;
+          #  settings.default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
+      #  };
 
 
         nixpkgs.config.allowUnfree = true;
