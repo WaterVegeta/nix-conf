@@ -11,6 +11,7 @@
 				self.nixosModules.laptopHardware
 				self.nixosModules.niri
 				self.nixosModules.common
+				self.nixosModules.neovim
     		];
 
 		  # Bootloader.
@@ -30,6 +31,22 @@
  		networking.wireless = {
  			enable = true;
  		};
+
+		networking.networkmanager.wifi.powersave = false;
+		# Enable Avahi for mDNS device discovery (Fixes QR code pairing)
+services.avahi = {
+  enable = true;
+  nssmdns4 = true;
+  openFirewall = true; # Automatically opens UDP 5353
+};
+
+# Open ADB wireless ports in the firewall
+networking.firewall = {
+  enable = true;
+  allowedTCPPorts = [ 5555 ]; # Default ADB connection port
+  allowedTCPPortRanges = [ { from = 30000; to = 50000; } ]; # ADB pairing range
+  allowedUDPPortRanges = [ { from = 30000; to = 50000; } ];
+};
 		
 		#services.greetd = {
       		#	enable = true;
@@ -72,9 +89,7 @@
  		   	variant = "";
  		};
  		
-		services.logind = {
-			powerKey = "ignore";
-		};
+		services.logind.settings.Login.HandlePowerKey = "ignore";
 		
 		myNiri.extraSettings = {
                		outputs = {
@@ -106,8 +121,8 @@
  		   	packages = with pkgs; [];
  		};
 
- 		networking.firewall.allowedTCPPorts = [ 53317 ];
- 		networking.firewall.allowedUDPPorts = [ 53317 ];
+ 		#networking.firewall.allowedTCPPorts = [ 53317 ];
+ 		#networking.firewall.allowedUDPPorts = [ 53317 ];
 
  		programs.firefox.enable = true;
  		programs.steam.enable = true;
@@ -117,6 +132,10 @@
  		services.power-profiles-daemon.enable = true;
  		services.upower.enable = true;
  		hardware.bluetooth.enable = true;
+
+		boot.kernelParams = [
+			"pcie_aspm.policy=performance"
+		];
 
   		# List packages installed in system profile. To search, run:
   		# $ nix search wget

@@ -33,6 +33,7 @@
             xwayland-satellite
             brightnessctl
             vim
+		neovim
         ];
 
     };
