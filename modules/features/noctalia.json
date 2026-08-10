@@ -695,7 +695,7 @@
     "notifyUpdates": false
   },
   "idle": {
-    "enabled": true,
+    "enabled": false,
     "screenOffTimeout": 200,
     "lockTimeout": 220,
     "suspendTimeout": 1800,

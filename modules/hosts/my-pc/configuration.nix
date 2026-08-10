@@ -75,6 +75,22 @@
       variant = "";
     };
 
+
+	xdg.portal = {
+		enable = true;
+    		extraPortals = [ 
+      			pkgs.xdg-desktop-portal-gnome # Needed for Niri's full-screen capture
+      			pkgs.xdg-desktop-portal-gtk   # Fallback for UI dialogs
+    		];
+    		config = {
+      			# Direct Niri to use the gnome backend specifically for screen sharing
+      			niri = {
+        			default = [ "gnome" "gtk" ];
+        			"org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+        			"org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+     			 };
+    		};
+	};
   # Enable CUPS to print documents.
     services.printing.enable = true;
 
