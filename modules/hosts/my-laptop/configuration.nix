@@ -8,10 +8,14 @@
 	flake.nixosModules.laptopConfig = { config, pkgs, lib, ... }:
 	{
 		imports = [ # Include the results of the hardware scan.
+				inputs.nixvim.nixosModules.nixvim
+
 				self.nixosModules.laptopHardware
 				self.nixosModules.niri
 				self.nixosModules.common
-				self.nixosModules.neovim
+				#self.nixosModules.neovim
+				self.nixosModules.nixvim
+				
     		];
 
 		  # Bootloader.
@@ -132,10 +136,14 @@ networking.firewall = {
  		services.power-profiles-daemon.enable = true;
  		services.upower.enable = true;
  		hardware.bluetooth.enable = true;
+		hardware.bluetooth.powerOnBoot = true;
+		services.blueman.enable = true;
 
 		boot.kernelParams = [
 			"pcie_aspm.policy=performance"
 		];
+
+		services.hardware.openrgb.enable = true;
 
   		# List packages installed in system profile. To search, run:
   		# $ nix search wget
@@ -143,6 +151,7 @@ networking.firewall = {
   		      android-studio
   		      vim
   		      git
+			openrgb
   		#  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   		#  wget
   		];

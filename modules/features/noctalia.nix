@@ -554,7 +554,11 @@
         { enabled = true; id = "fuzzel"; }
         { enabled = true; id = "pywalfox"; }
         { enabled = true; id = "niri"; }
+        { enabled = true; id = "qt"; }
+        { enabled = true; id = "hyprtoolkit"; }
         { enabled = true; id = "kcolorscheme"; }
+        { enabled = true; id = "btop"; }
+        { enabled = true; id = "telegram"; }
       ];
       enableUserTheming = false;
     };
