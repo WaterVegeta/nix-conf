@@ -69,7 +69,7 @@
 	    la = "ls -al";
 	    cl = "clear";
 	    test-build = "sudo nixos-rebuild test --flake ~/nix-conf#laptop";
-	    switch-build = "sudo nixos-rebuild switch --flake ~/nix-conf#myLaptop";
+	    switch-build = "sudo nixos-rebuild switch --flake ~/nix-conf#laptop";
 	    gpu-status = "cat ${gpuPath}/runtime_status";
 	    autosuspend-delay = "cat ${gpuPath}/autosuspend_delay_ms";
 	    power-low = "sudo ryzenadj --stapm-limit=4000 --fast-limit=4000 --slow-limit=4000";
@@ -91,19 +91,16 @@
 	services.upower.enable = true;
 	hardware.bluetooth.enable = true;
 	hardware.bluetooth.powerOnBoot = true;
-	services.blueman.enable = true;
 
-	boot.kernelParams = [
-	    "pcie_aspm.policy=performance"
-	];
+	#boot.kernelParams = [
+	#    "pcie_aspm.policy=performance"
+	#];
 
 	services.hardware.openrgb.enable = true;
 
 	environment.systemPackages = with pkgs; [
 	    android-studio
-		vim
-		git
-		openrgb
+	    openrgb
 	];
 
 	system.stateVersion = "26.05"; # Did you read the comment?

@@ -37,7 +37,7 @@
 			};
 			repeat-rate = 30;
 			repeat-delay = 250;
-			numlock = {};
+			#numlock = {};
 		    };
 
 		    mouse = {
@@ -60,6 +60,7 @@
 		layout = {
 		    always-center-single-column = _: {};
 		    gaps = 8;
+		    background-color = "transparent";
 		    preset-column-widths = [
 		    {proportion = 0.33333;}
 		    {proportion = 0.5;}
@@ -73,7 +74,22 @@
 
 		animations = {
 		    slowdown = 1;
+		    window-open = let
+			shader = ./niri-shader.frag;
+		    in{
+			duration-ms = 250;
+			curve = "linear";
+			
+			custom-shader = "${shader}";
+		    };
 		};
+
+		layer-rules = [
+		    {
+			matches = [ {} ];
+			place-within-backdrop = true;
+		    }
+		];
 
 		window-rules = [
 #{
@@ -92,18 +108,32 @@
 
 		binds = {
 		    "Mod+Return".spawn = "alacritty";                  
-		    "Mod+D".spawn-sh = pkgs.lib.getExe (mkMenu [
+		    "Mod+D" = _: {
+
+			props.repeat = false;
+			content.spawn-sh = pkgs.lib.getExe (mkMenu [
 			    {
 				key = "f";
 				desc = "Firefoxi";
 				cmd = "firefox";
 			    }
 			    {
-				key = "w";
-				desc = "w in the chat";
-				cmd = "wwwww";
+				key = "s";
+				desc = "LocalSend";
+				cmd = "localsend_app";
 			    }
-		    ]);
+			    {
+				key = "A";
+				desc = "Android Studio";
+				cmd = "android-studio";
+			    }
+			    {
+				key = "q";
+				desc = "exit";
+				cmd = "null";
+			    }
+			]);
+		    };
 		    "Mod+S".spawn-sh = "${noctalia} ipc call launcher toggle";
 # --- Window management ---
 		    "Mod+Q".close-window = {};

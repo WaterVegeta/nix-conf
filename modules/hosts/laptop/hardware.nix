@@ -17,7 +17,9 @@
 	{ device = "/dev/mapper/luks-7d5088d6-731f-42e8-a51e-1868b2ed0e29";
 	    fsType = "ext4";
 	};
-
+	
+	#fix for hibernation?
+	boot.resumeDevice = "/dev/mapper/luks-710f71b8-cdef-4fa2-aca7-0a075b11109a";
 	boot.initrd.luks.devices."luks-7d5088d6-731f-42e8-a51e-1868b2ed0e29".device = "/dev/disk/by-uuid/7d5088d6-731f-42e8-a51e-1868b2ed0e29";
 
 	fileSystems."/boot" =
@@ -38,6 +40,19 @@
 	};
 
 	services.xserver.videoDrivers = [ "amdgpu" "nvidia" ];
+
+#	systemd.services.disable-acpi-wake = {
+#	    description = "Disable ACPI wake-up triggers for USB and PCIe";
+#	    wantedBy = [ "multi-user.target" ];
+#	    script = ''
+#		# List of devices from your /proc/acpi/wakeup output
+#		for dev in XHC0 XHC1 XHC3 XHC4 NHI0 GPP0 GPP6 GP11; do
+#		    if grep -q "$dev.*enabled" /proc/acpi/wakeup; then
+#			echo $dev > /proc/acpi/wakeup
+#		    fi
+#		done
+#	    '';
+#	};
 
 	hardware.nvidia = {
 	    prime = {

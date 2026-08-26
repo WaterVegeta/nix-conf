@@ -17,6 +17,16 @@
 	time.timeZone = "Europe/Kyiv";
 
 	i18n.defaultLocale = "en_US.UTF-8";
+	
+	environment.sessionVariables = {
+	    GTK_THEME = "Adwaita-dark";
+	    QT_QPA_PLATFORMTHEME = "qt6ct";
+	};
+	
+	i18n.supportedLocales = [
+	    "en_US.UTF-8/UTF-8"
+	    "uk_UA.UTF-8/UTF-8"
+	];
 
 	i18n.extraLocaleSettings = {
 	    LC_ADDRESS = "uk_UA.UTF-8";
@@ -45,11 +55,38 @@
       #  };
 
 
+	programs.dconf.enable = true;
+	#dconf.settings = {
+	#    "org/gnome/desktop/interface" = {
+	#	color-scheme = "prefer-dark";
+	#    };
+	#};
+	xdg.portal = {
+	    enable = true;
+	    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+	};
+	#gtk = {
+	#    enable = true;
+	#    theme = {
+	#	name = "Adwaita-dark";
+	#	package = pkgs.gnome-themes-extra;
+	#    };
+	#    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+	#    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+	#};
+
+	#qt = {
+	#    enable = true;
+	#    platformTheme.name = "gtk"; # Forces Qt apps to follow GTK theme
+	#	style.name = "Adwaita-dark";
+	#};
+
         nixpkgs.config.allowUnfree = true;
 
         environment.systemPackages = with pkgs; [
+	    librewolf
+	    dconf
 	    localsend
-	    micro
             ddcui
             ddcutil
             alacritty
@@ -61,8 +98,6 @@
             git
             xwayland-satellite
             brightnessctl
-            vim
-	#	neovim
         ];
 
     };
