@@ -171,6 +171,10 @@
 		    "Mod+F".maximize-column = {};
 
 # --- Focus movement ---
+		    "Mod+H".focus-column-left = {};
+		    "Mod+L".focus-column-right = {};
+		    "Mod+K".focus-window-up = {};
+		    "Mod+J".focus-window-down = {};
 		    "Mod+Left".focus-column-left = {};
 		    "Mod+Right".focus-column-right = {};
 		    "Mod+Up".focus-window-up = {};
