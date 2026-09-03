@@ -35,6 +35,8 @@
 	    enable = true;
 	};
 
+	services.displayManager.ly.enable = true;
+
 	networking.networkmanager.wifi.powersave = false;
 	services.avahi = {
 	    enable = true;
@@ -92,6 +94,19 @@
 	hardware.bluetooth.enable = true;
 	hardware.bluetooth.powerOnBoot = true;
 
+	programs.starship = {
+	    enable = true;
+	    settings = {
+		add_newline = true;
+		command_timeout = 1300;
+		scan_timeout = 50;
+		format = "$all$nix_shell$nodejs$lua$golang$rust$php$git_branch$git_commit$git_state$git_status\n$username$hostname$directory";
+		character = {
+		    success_symbol = "[](bold green) ";
+		    error_symbol = "[✗](bold red) ";
+		};
+  };
+	};
 	#boot.kernelParams = [
 	#    "pcie_aspm.policy=performance"
 	#];
@@ -101,6 +116,7 @@
 	environment.systemPackages = with pkgs; [
 	    android-studio
 	    openrgb
+	    starship
 	];
 
 	system.stateVersion = "26.05"; # Did you read the comment?
