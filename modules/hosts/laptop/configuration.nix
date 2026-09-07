@@ -20,6 +20,7 @@
 	    self.nixosModules.niri
 	    self.nixosModules.common
 	    self.nixosModules.nixvim
+	    self.nixosModules.myAlacritty
 
 	];
 

@@ -7,12 +7,11 @@
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
         boot.loader.systemd-boot.configurationLimit = 5;
-
-	environment.loginShellInit = ''
-	    if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-		exec niri
-		    fi
-		    '';
+	#environment.loginShellInit = ''
+	#    if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+	#	exec niri
+	#	    fi
+	#	    '';
 
 	time.timeZone = "Europe/Kyiv";
 
@@ -90,12 +89,13 @@
         nixpkgs.config.allowUnfree = true;
 
         environment.systemPackages = with pkgs; [
+	    codeblocks
 	    librewolf
 	    dconf
 	    localsend
             ddcui
             ddcutil
-            alacritty
+            #alacritty
             capitaine-cursors
             steam
             discord
