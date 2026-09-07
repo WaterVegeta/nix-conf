@@ -74,14 +74,14 @@
 
 		animations = {
 		    slowdown = 1;
-		    window-open = let
-			shader = ./niri-shader.frag;
-		    in{
-			duration-ms = 250;
-			curve = "linear";
-			
-			custom-shader = "${shader}";
-		    };
+		    #window-open = let
+		    #    shader = ./niri-shader.frag;
+		    #in{
+		    #	duration-ms = 250;
+		    #    curve = "linear";
+		    #    
+		    #    custom-shader = "${shader}";
+		    #};
 		};
 
 		layer-rules = [
