@@ -143,7 +143,8 @@
         "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
-        "wrapper-modules": "wrapper-modules"
+        "wrapper-modules": "wrapper-modules",
+        "xwayland-satellite-old": "xwayland-satellite-old"
       }
     },
     "systems": {
@@ -178,6 +179,22 @@
       "original": {
         "owner": "BirdeeHub",
         "repo": "nix-wrapper-modules",
+        "type": "github"
+      }
+    },
+    "xwayland-satellite-old": {
+      "locked": {
+        "lastModified": 1785572750,
+        "narHash": "sha256-y8TK4/SmIVCD1m+qxjQ2pu3KS5SQKiM+BONsi/XfG4U=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "cb73bff643b27b72994ddda0f98cb1cc6ed58c9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "cb73bff643b27b72994ddda0f98cb1cc6ed58c9c",
         "type": "github"
       }
     }

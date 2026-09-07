@@ -1,6 +1,8 @@
 { self, inputs, ... }: {
 
     flake.nixosConfigurations.pc = inputs.nixpkgs.lib.nixosSystem{
+	specialArgs = { inherit inputs;};
+
 	modules = [
 	    self.nixosModules.myPcConfiguration
 	];
@@ -15,6 +17,7 @@
 	    self.nixosModules.niri
 	    self.nixosModules.nixvim
 	    self.nixosModules.common
+	    self.nixosModules.myAlacritty
 	];
 
 	services.xserver.videoDrivers = ["nvidia"];
@@ -29,6 +32,7 @@
 	    switch-build = "sudo nixos-rebuild switch --flake ~/nix-conf#pc";	
 	};
 
+	services.displayManager.ly.enable = true;
 
 	myNiri.extraSettings = {
 	    outputs = {

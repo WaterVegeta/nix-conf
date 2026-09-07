@@ -1,16 +1,18 @@
 {
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    inputs = {
+	nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:vic/import-tree";
+	flake-parts.url = "github:hercules-ci/flake-parts";
+	import-tree.url = "github:vic/import-tree";
 
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+# by old means 0.8.0 version cuz on 0.8.2 steam menus doesnt work
+	xwayland-satellite-old.url = "github:nixos/nixpkgs/cb73bff643b27b72994ddda0f98cb1cc6ed58c9c";
+	wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 	nixvim = {
-        	url = "github:nix-community/nixvim";
-        	#inputs.nixpkgs.follows = "nixpkgs";
+	    url = "github:nix-community/nixvim";
+#inputs.nixpkgs.follows = "nixpkgs";
+	};
     };
-  };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
+    outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 }

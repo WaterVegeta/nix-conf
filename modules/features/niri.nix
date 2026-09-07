@@ -215,6 +215,8 @@
 		};
 	    };
 
+	    environment.systemPackages = [ noctaliaPkg ];
+
 	    environment.variables = {
 		XCURSOR_THEME = "capitaine-cursors";
 		XCURSOR_SIZE = "36";

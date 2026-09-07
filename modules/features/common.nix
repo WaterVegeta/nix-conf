@@ -1,6 +1,19 @@
 {self, inputs, ...}: {
 
-    flake.nixosModules.common = {pkgs, lib, ...}:{
+    flake.nixosModules.common = {pkgs, lib, ...}:
+    let 
+	system = pkgs.stdenv.hostPlatform.system;
+	old-xwayland-satellite = inputs.xwayland-satellite-old.legacyPackages.${system}.xwayland-satellite;
+
+    in
+
+    {
+
+	nixpkgs.overlays = [
+	    (self: super: {
+		xwayland-satellite = old-xwayland-satellite;
+	  })
+	];
 
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -16,7 +29,7 @@
 	time.timeZone = "Europe/Kyiv";
 
 	i18n.defaultLocale = "en_US.UTF-8";
-	
+
 	environment.sessionVariables = {
 	    GTK_THEME = "Adwaita-dark";
 	    QT_QPA_PLATFORMTHEME = "qt6ct";
@@ -95,14 +108,13 @@
 	    localsend
             ddcui
             ddcutil
-            #alacritty
+	    xwayland-satellite
             capitaine-cursors
             steam
             discord
             heroic
             fastfetch
             git
-            xwayland-satellite
             brightnessctl
         ];
 
