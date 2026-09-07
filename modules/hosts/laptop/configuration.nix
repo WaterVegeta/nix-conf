@@ -108,9 +108,6 @@
 		};
   };
 	};
-	#boot.kernelParams = [
-	#    "pcie_aspm.policy=performance"
-	#];
 
 	services.hardware.openrgb.enable = true;
 
