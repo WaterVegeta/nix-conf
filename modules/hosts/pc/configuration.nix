@@ -2,7 +2,6 @@
 
     flake.nixosConfigurations.pc = inputs.nixpkgs.lib.nixosSystem{
 	specialArgs = { inherit inputs;};
-
 	modules = [
 	    self.nixosModules.myPcConfiguration
 	];
@@ -11,39 +10,60 @@
  
     flake.nixosModules.myPcConfiguration = { config, pkgs, lib, ... }:
     {
-    # import any other modules from here
 	imports = [
 	    self.nixosModules.myPcHardware
-	    self.nixosModules.niri
+	    #self.nixosModules.niri
 	    self.nixosModules.nixvim
 	    self.nixosModules.common
 	    self.nixosModules.myAlacritty
+	    #self.nixosModules.dms-niri
+	    inputs.home-manager.nixosModules.home-manager
 	];
+
+	programs.niri.enable = true;
+	home-manager = {
+	    useGlobalPkgs = true;
+	    useUserPackages = true;
+	    backupFileExtension = "backup"; 
+	    extraSpecialArgs = { inherit inputs; };
+	    users.what = {
+		imports = [
+		    ./../../features/desktop/niri/_niri-home.nix
+		    ./../../features/desktop/dms/_dms-home.nix
+		];
+		home.username = "what";
+		home.homeDirectory = "/home/what";
+		home.stateVersion = "26.05";
+	    };
+	};
 
 	services.xserver.videoDrivers = ["nvidia"];
 
 	networking.hostName = "what-host"; # Define your hostname.
 
 	networking.networkmanager.enable = true;
-	programs.bash.shellAliases ={
-	    la = "ls -al";
-	    cl = "clear";
-	    test-build = "sudo nixos-rebuild test --flake ~/nix-conf#pc";
-	    switch-build = "sudo nixos-rebuild switch --flake ~/nix-conf#pc";	
-	};
-
-	services.displayManager.ly.enable = true;
-
-	myNiri.extraSettings = {
-	    outputs = {
-		"DP-1" = {
-		    mode = "1920x1080@165.004";
-		    scale = 1;
-		    transform = "normal";
-		    position = _: {props = {x = 0; y = 0;};};
-		};
+	programs.bash ={
+	    enable =true;
+	    shellAliases ={
+		la = "ls -al";
+		cl = "clear";
+		nrt = "sudo nixos-rebuild test --flake ~/nix-conf#pc";
+		nrs = "sudo nixos-rebuild switch --flake ~/nix-conf#pc";	
 	    };
 	};
+
+	#services.displayManager.ly.enable = true;
+
+	#myNiri.extraSettings = {
+	#    outputs = {
+	#	"DP-1" = {
+	#	    mode = "1920x1080@165.004";
+	#	    scale = 1;
+	#	    transform = "normal";
+	#	    position = _: {props = {x = 0; y = 0;};};
+	#	};
+	#    };
+	#};
 
 	programs.appimage.enable = true;
 	programs.appimage.binfmt = true;

@@ -12,6 +12,7 @@
 	imports = [
 	    self.nixosModules.locales
 	    self.nixosModules.add-script
+	    self.nixosModules.ly-dm
 	];
 
 	nixpkgs.overlays = [
@@ -31,7 +32,7 @@
 	    QT_QPA_PLATFORMTHEME = "qt6ct";
 	};
 
-	programs.bash.enable = true;
+	#programs.bash.enable = true;
 	programs.starship = {
 	    enable = true;
 	    settings = {
@@ -61,6 +62,7 @@
         nixpkgs.config.allowUnfree = true;
 
         environment.systemPackages = with pkgs; [
+	    obs-studio
 	    librewolf
 	    dconf
 	    localsend

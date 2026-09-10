@@ -45,7 +45,7 @@
 		    };
 
 		    focus-follows-mouse = _: {
-			max-scroll-amount = "0%";
+			max-scroll-amount = "10%";
 		    };
 		    touchpad = {
 			tap = _: {};
@@ -62,9 +62,9 @@
 		    gaps = 8;
 		    background-color = "transparent";
 		    preset-column-widths = [
-		    {proportion = 0.33333;}
-		    {proportion = 0.5;}
-		    {proportion = 0.8;}
+			{proportion = 0.33333;}
+			{proportion = 0.5;}
+			{proportion = 0.8;}
 		    ];
 		    focus-ring = {
 			width = 3;

@@ -1,5 +1,57 @@
 {
   "nodes": {
+    "dank-qml-common": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788376015,
+        "narHash": "sha256-/tT8rTznLADndTwLBzdgzzgfJH1ZhYQibYo5v/F8U+U=",
+        "owner": "AvengeMedia",
+        "repo": "dank-qml-common",
+        "rev": "26396ce432d6c71c3f5367438f96f4a8d667e160",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dank-qml-common",
+        "type": "github"
+      }
+    },
+    "dms": {
+      "inputs": {
+        "dank-qml-common": "dank-qml-common",
+        "flake-compat": "flake-compat",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1788980411,
+        "narHash": "sha256-a79wAhlH0J4bMMIxUPnzhi2LqqhPG7NipLE5CFPpJyI=",
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "rev": "65fb97d247e1e8d14408f1ccf0c32fc8c6bcbd7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "type": "github"
+      }
+    },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -39,6 +91,27 @@
         "type": "github"
       }
     },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788642154,
+        "narHash": "sha256-sPpQFVaFTDqO/4vvCAhuAhqTgqN/ygu+9eJcs5eB0js=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "fd0956c99c41ae3c13a73a638f1f7e963aebc4ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-26.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "import-tree": {
       "locked": {
         "lastModified": 1788275959,
@@ -56,11 +129,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1788316716,
-        "narHash": "sha256-bc7rSpXIdn9QWGNqfWcPZWOhEVF8NoeAZkWq0XWnf/k=",
+        "lastModified": 1787135253,
+        "narHash": "sha256-RD2kNWCG+Bjo6h+JVjWVNntZs2GtRoeY2xHjts/FNkA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3ed67ec0a4d3c7ab4ae1f04f8ee8df07bfa506a2",
+        "rev": "ffb3c9b700e759be2ef13237c9d8f953b32a1e46",
         "type": "github"
       },
       "original": {
@@ -87,6 +160,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1788316716,
+        "narHash": "sha256-bc7rSpXIdn9QWGNqfWcPZWOhEVF8NoeAZkWq0XWnf/k=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "3ed67ec0a4d3c7ab4ae1f04f8ee8df07bfa506a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1787631388,
         "narHash": "sha256-vMiXptXarfSdJb1Gkc+FYVOAibuBRj7qxGa8z68q1Uw=",
         "owner": "NixOS",
@@ -101,7 +190,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1786719841,
         "narHash": "sha256-QcpQOT0NQEFkI77t+YXPZqDJc35iIodG7zinieOwFUg=",
@@ -120,7 +209,7 @@
     "nixvim": {
       "inputs": {
         "flake-parts": "flake-parts_2",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "systems": "systems"
       },
       "locked": {
@@ -139,9 +228,11 @@
     },
     "root": {
       "inputs": {
+        "dms": "dms",
         "flake-parts": "flake-parts",
+        "home-manager": "home-manager",
         "import-tree": "import-tree",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "wrapper-modules": "wrapper-modules",
         "xwayland-satellite-old": "xwayland-satellite-old"
@@ -166,7 +257,7 @@
     },
     "wrapper-modules": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1787722691,
