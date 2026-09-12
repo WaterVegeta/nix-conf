@@ -38,7 +38,7 @@
 		wm.niri.display = ''
 		    output "DP-1"{
 			mode "1920x1080@165.004"
-			scale 1.2
+			scale 1
 			transform "normal"
 			position x=1280 y=1080
 		    }
