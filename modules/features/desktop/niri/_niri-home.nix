@@ -1,44 +1,52 @@
-{ pkgs, lib, inputs, ...}: let
+{ pkgs, lib, inputs, config, ...}: let
     openLauncher = "dms ipc call launcher open";
     wallpaper = "dms ipc call wallpaper next";
-in{
+    keyboard = ''
+	keyboard {
+	    xkb {
+		layout "us,ua"
+		options "grp:alt_shift_toggle,caps:escape"
+	    }
+	    repeat-rate 30
+	    repeat-delay 250
 
-    xdg.configFile."niri/config.kdl" = {
-	force = true;
-	text = ''
+	    //numlock
+	}
+    '';
+    touchpad = ''
+	touchpad {
+	    tap
+	    natural-scroll
+	}
+
+    '';
+    mouse = ''
+	mouse {
+	    // natural-scroll
+	    // accel-speed 0.2
+	    accel-profile "flat"
+	    // scroll-method "no-scroll"
+	}
+    '';
+    trackpoint = ''
+	
+	trackpoint {
+	}
+    '';
+    input = ''
 	input {
-    keyboard {
-        xkb {
-            layout "us,ua"
-	    options "grp:alt_shift_toggle,caps:escape"
-        }
-	repeat-rate 30
-	repeat-delay 250
+	    ${keyboard}
+	    ${mouse}
+	    ${touchpad}
+	    ${trackpoint}
+	    // warp-mouse-to-focus
 
-        //numlock
-    }
+	    // focus-follows-mouse max-scroll-amount="0%"
+	}
+    '';
 
-    touchpad {
-        tap
-        natural-scroll
-    }
-
-    mouse {
-        // natural-scroll
-        // accel-speed 0.2
-         accel-profile "flat"
-        // scroll-method "no-scroll"
-    }
-
-    trackpoint {
-    }
-
-    // warp-mouse-to-focus
-
-    // focus-follows-mouse max-scroll-amount="0%"
-}
-
-output "DP-1" {
+    display = ''
+	output "DP-1" {
     // Uncomment this line to disable this output.
     // off
 
@@ -62,138 +70,15 @@ output "DP-1" {
     position x=1280 y=0
 }
 
-layout {
-    // Set gaps around windows in logical pixels.
-    gaps 8
-
-    // When to center a column when changing focus, options are:
-    // - "never", default behavior, focusing an off-screen column will keep at the left
-    //   or right edge of the screen.
-    // - "always", the focused column will always be centered.
-    // - "on-overflow", focusing a column will center it if it doesn't fit
-    //   together with the previously focused column.
-    center-focused-column "never"
-
-    // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
-    preset-column-widths {
-        // Proportion sets the width as a fraction of the output width, taking gaps into account.
-        // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
-        // The default preset widths are 1/3, 1/2 and 2/3 of the output.
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-
-        // Fixed sets the width in logical pixels exactly.
-        // fixed 1920
-    }
-
-    // You can also customize the heights that "switch-preset-window-height" (Mod+Ctrl+Shift+R) toggles between.
-    // preset-window-heights { }
-
-    // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
-
-    focus-ring {
-
-        width 4
-
-        active-color "#7fc8ff"
-
-        inactive-color "#505050"
-
-                // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
-
-                // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
-    border {
-        off
-
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
-
-        urgent-color "#9b0000"
-
-        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-    }
-
-    shadow {
-        // on
-
-        // draw-behind-window true
-
-        // Softness controls the shadow blur radius.
-        softness 30
-
-        // Spread expands the shadow.
-        spread 5
-
-        // Offset moves the shadow relative to the window.
-        offset x=0 y=5
-
-        // You can also change the shadow color and opacity.
-        color "#0007"
-    }
-
-    struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
-    }
-}
-
-// Note that running niri as a session supports xdg-desktop-autostart,
-
-//spawn-at-startup "waybar"
-
-// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
-
-hotkey-overlay {
-    // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-    // skip-at-startup
-}
-
- prefer-no-csd
-
-// You can change the path where screenshots are saved.
-// A ~ at the front will be expanded to the home directory.
-// The path is formatted with strftime(3) to give you the screenshot date and time.
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-
-// You can also set this to null to disable saving screenshots to disk.
-// screenshot-path null
-
-animations {
-    // Uncomment to turn off all animations.
-    // off
-
-    // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
-}
-
-window-rule {
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
-
-// Open the Firefox picture-in-picture player as floating by default.
-window-rule {
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
-}
-
-/-window-rule {
-    geometry-corner-radius 12
-    clip-to-geometry true
-}
-
-binds {
+    '';
+    cursor = ''
+	cursor {
+	    xcursor-theme "capitaine-cursors"
+	    xcursor-size 36
+	}
+    '';
+    binds = ''
+	binds {
     Mod+P { spawn-sh "${wallpaper}";} 
     Mod+S { spawn-sh "${openLauncher}";}
     // shows a list of important hotkeys.
@@ -469,7 +354,175 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
+
     '';
+in{
+    options = {
+	wm.niri.display = lib.mkOption {
+	    type = lib.types.str;
+	    default = ''
+		output "DP-1"{
+		    mode "1920x1080@165.004"
+		    scale 1
+		    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+		    transform "normal"
+
+		    position x=1280 y=0
+		}
+	    '';
+	    description = "override display settings";
+	    example = ''
+		output "DP-1"{
+		    mode "WidthxHeight@Hz"
+		    scale 1
+		    transform "normal"
+		    position x=1280 y=0
+		}
+	    '';
+	};
+    };
+    config = {
+    xdg.configFile."niri/config.kdl" = {
+	force = true;
+	text = ''
+	    ${input}
+	    ${cursor}
+	    ${config.wm.niri.display}
+	    ${binds}
+
+layout {
+    // Set gaps around windows in logical pixels.
+    gaps 8
+
+    // When to center a column when changing focus, options are:
+    // - "never", default behavior, focusing an off-screen column will keep at the left
+    //   or right edge of the screen.
+    // - "always", the focused column will always be centered.
+    // - "on-overflow", focusing a column will center it if it doesn't fit
+    //   together with the previously focused column.
+    center-focused-column "never"
+
+    // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
+    preset-column-widths {
+        // Proportion sets the width as a fraction of the output width, taking gaps into account.
+        // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
+        // The default preset widths are 1/3, 1/2 and 2/3 of the output.
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+
+        // Fixed sets the width in logical pixels exactly.
+        // fixed 1920
+    }
+
+    // You can also customize the heights that "switch-preset-window-height" (Mod+Ctrl+Shift+R) toggles between.
+    // preset-window-heights { }
+
+    // You can change the default width of the new windows.
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+
+        width 4
+
+        active-color "#7fc8ff"
+
+        inactive-color "#505050"
+
+                // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
+
+                // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    border {
+        off
+
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+
+        urgent-color "#9b0000"
+
+        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    shadow {
+        // on
+
+        // draw-behind-window true
+
+        // Softness controls the shadow blur radius.
+        softness 30
+
+        // Spread expands the shadow.
+        spread 5
+
+        // Offset moves the shadow relative to the window.
+        offset x=0 y=5
+
+        // You can also change the shadow color and opacity.
+        color "#0007"
+    }
+
+    struts {
+        // left 64
+        // right 64
+        // top 64
+        // bottom 64
+    }
+}
+
+// Note that running niri as a session supports xdg-desktop-autostart,
+
+//spawn-at-startup "waybar"
+
+// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
+// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+
+hotkey-overlay {
+    // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
+    // skip-at-startup
+}
+
+ prefer-no-csd
+
+// You can change the path where screenshots are saved.
+// A ~ at the front will be expanded to the home directory.
+// The path is formatted with strftime(3) to give you the screenshot date and time.
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// You can also set this to null to disable saving screenshots to disk.
+// screenshot-path null
+
+animations {
+    // Uncomment to turn off all animations.
+    // off
+
+    // Slow down all animations by this factor. Values below 1 speed them up instead.
+    // slowdown 3.0
+}
+
+window-rule {
+    // You can get away with just app-id="wezterm" if you want.
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+/-window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+    '';
+    };
     };
 
 }

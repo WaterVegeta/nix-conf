@@ -34,6 +34,15 @@
 		home.username = "what";
 		home.homeDirectory = "/home/what";
 		home.stateVersion = "26.05";
+
+		wm.niri.display = ''
+		    output "DP-1"{
+			mode "1920x1080@165.004"
+			scale 1.2
+			transform "normal"
+			position x=1280 y=1080
+		    }
+		'';
 	    };
 	};
 
