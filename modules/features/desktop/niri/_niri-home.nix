@@ -1,6 +1,10 @@
 { pkgs, lib, inputs, config, ...}: let
     openLauncher = "dms ipc call launcher open";
     wallpaper = "dms ipc call wallpaper next";
+    playPauseMedia = "dms ipc call mpris playPause";
+    stopMedia = "dms ipc call mpris stop";
+    nextMedia = "dms ipc call mpris next";
+    previousMedia = "dms ipc call mpris previous";
     keyboard = ''
 	keyboard {
 	    xkb {
@@ -105,11 +109,11 @@
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioPause       allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "${playPauseMedia}"; }
+    XF86AudioPause       allow-when-locked=true { spawn-sh "${playPauseMedia}";}
+    XF86AudioStop        allow-when-locked=true { spawn-sh "${stopMedia}"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "${previousMedia}"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "${nextMedia}"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
