@@ -28,13 +28,13 @@
 	    useUserPackages = true;
 	    backupFileExtension = "backup"; 
 	    extraSpecialArgs = { inherit inputs; };
-	    users.what = {
+	    users.kenni = {
 		imports = [
 		    ./../../features/desktop/niri/_niri-home.nix
 		    ./../../features/desktop/dms/_dms-home.nix
 		];
-		home.username = "what";
-		home.homeDirectory = "/home/what";
+		home.username = "kenni";
+		home.homeDirectory = "/home/kenni";
 		home.stateVersion = "26.05";
 
 		wm.niri.display = ''
@@ -47,7 +47,7 @@
 		'';
 	    };
 	};
-
+	programs.niri.enable = true;
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
