@@ -62,6 +62,8 @@
         nixpkgs.config.allowUnfree = true;
 
         environment.systemPackages = with pkgs; [
+	    bat
+	    telegram-desktop
 	    obs-studio
 	    librewolf
 	    dconf

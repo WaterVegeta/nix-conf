@@ -33,6 +33,12 @@
 		];
 		home.username = "what";
 		home.homeDirectory = "/home/what";
+		home.pointerCursor = {
+		    gtk.enable = true;
+		    package = pkgs.capitaine-cursors;
+		    name = "capitaine-cursors";
+		    size = 36; # Set your desired cursor size here
+		};
 		home.stateVersion = "26.05";
 
 		wm.niri.display = ''
@@ -40,7 +46,7 @@
 			mode "1920x1080@165.004"
 			scale 1
 			transform "normal"
-			position x=1280 y=1080
+			position x=0 y=0
 		    }
 		'';
 	    };
@@ -60,19 +66,6 @@
 		nrs = "sudo nixos-rebuild switch --flake ~/nix-conf#pc";	
 	    };
 	};
-
-	#services.displayManager.ly.enable = true;
-
-	#myNiri.extraSettings = {
-	#    outputs = {
-	#	"DP-1" = {
-	#	    mode = "1920x1080@165.004";
-	#	    scale = 1;
-	#	    transform = "normal";
-	#	    position = _: {props = {x = 0; y = 0;};};
-	#	};
-	#    };
-	#};
 
 	programs.appimage.enable = true;
 	programs.appimage.binfmt = true;
